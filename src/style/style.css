@@ -205,4 +205,5 @@ footer {
 article {
     font-family: var(--title-font);
     font-size: 18px;
+    padding-bottom: 50px;
 }

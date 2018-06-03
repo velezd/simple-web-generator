@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
-        <title>{web_name}</title>
-        <link rel="stylesheet" href="style/style.css">
-        <link rel="stylesheet" href="style/simpleLightbox.min.css">
-        <script type="text/javascript" src="scripts/jquery-3.3.1.slim.min.js"></script>
-        <script type="text/javascript" src="scripts/responsive_menu.js"></script>
-        <script type="text/javascript" src="scripts/simpleLightbox.min.js"></script>
+        <link rel="stylesheet" href="{path}style/style.css">
+        <link rel="stylesheet" href="{path}style/simpleLightbox.min.css">
+        <script type="text/javascript" src="{path}scripts/jquery-3.3.1.slim.min.js"></script>
+        <script type="text/javascript" src="{path}scripts/responsive_menu.js"></script>
+        <script type="text/javascript" src="{path}scripts/simpleLightbox.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+        <title>{web_name}</title>
     </head>
     <body>
         <div class="black_bar">
             <header id=header>
-                <img src="style/logo.png" class="logo">
+                <img src="{path}style/logo.png" class="logo">
                 <nav id="navigation">
                     <a href="javascript:void(0);" class="icon" onclick="showMenu()">
-                        <img src="style/menu.png">
+                        <img src="{path}style/menu.png">
                     </a>
                     <ol id="menu" class="topnav">
                         {menu}
