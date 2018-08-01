@@ -1,5 +1,6 @@
 {
-  "name": "Zdeněk Veleba",
-  "default_page": "10_blog",
-  "copyright": "&copy; Zdeněk Veleba 2018"
+  "name": "Web name",
+  "default_page": "test_blog",
+  "copyright": "&copy; Something",
+  "web_root": "/"
 }

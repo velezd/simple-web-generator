@@ -2,7 +2,7 @@ import os
 
 
 def path_split(path):
-    """ Split path to components """
+    ''' Split path to components '''
     directories = []
     while True:
         path, directory = os.path.split(path)
@@ -20,15 +20,16 @@ def path_split(path):
 
 
 def src_to_static(path):
-    """ Replaces src to static at the start of path """
+    ''' Replaces src to static at the start of path '''
     new_path = path_split(path)
     if new_path[0] == 'src':
         new_path[0] = 'output'
 
-    try:
-        new_path[2] = new_path[2].split('-')[1]
-    except IndexError:
-        print('ERROR: All page directories must start with "[number]-"')
+    # Remove numbering from path:
+    # /pages/10-blog/posts/10-skoda_forman.html -> /pages/blog/posts/skoda_forman.html
+    for x in range(len(new_path)):
+        if '-' in new_path[x]:
+            new_path[x] = new_path[x].split('-')[1]
 
     return os.path.join(*new_path)
 

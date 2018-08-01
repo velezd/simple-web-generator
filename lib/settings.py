@@ -2,14 +2,39 @@ import json
 from os.path import join
 
 
-def load_settings():
-    """
-    Load web settings from json file.
+def singleton(cls):
+    '''
+    Decorator for creating one instance of class accessible from anywhere without additional initializing
 
-    :return: dict
-    """
-    try:
-        with open(join('src', 'web_settings.json'), 'r') as file:
-            return json.loads(file.read())
-    except IOError:
-        print('Can\'t load web settings')
+    :param cls: Class
+    :return: function returning instance
+    '''
+
+    instances = {}
+
+    def getinstance():
+        if cls not in instances:
+            instances[cls] = cls()
+        return instances[cls]
+
+    return getinstance
+
+
+@singleton
+class Settings():
+    def __init__(self):
+        ''' Load and store web settings from json file. '''
+        self.name = ''
+        self.default_page = ''
+        self.copyright = ''
+        self.web_root = ''
+
+        try:
+            with open(join('src', 'web_settings.json'), 'r') as file:
+                temp = json.loads(file.read())
+                self.name = temp['name']
+                self.default_page = temp['default_page']
+                self.copyright = temp['copyright']
+                self.web_root = temp['web_root']
+        except IOError:
+            print('Can\'t load web settings')

@@ -3,9 +3,12 @@
     <head>
         <link rel="stylesheet" href="{path}style/style.css">
         <link rel="stylesheet" href="{path}style/simpleLightbox.min.css">
+        <link rel="stylesheet" href="{path}style/highlight-idea.css">
         <script type="text/javascript" src="{path}scripts/jquery-3.3.1.slim.min.js"></script>
         <script type="text/javascript" src="{path}scripts/responsive_menu.js"></script>
         <script type="text/javascript" src="{path}scripts/simpleLightbox.min.js"></script>
+        <script type="text/javascript" src="{path}scripts/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="UTF-8">
         <title>{web_name}</title>
@@ -30,7 +33,7 @@
             </div>
         </div>
         <footer>
-            	{copy}
+            	{copy} - <a href="{path}misc/about.html">About web</a>
         </footer>
     </body>
 </html>

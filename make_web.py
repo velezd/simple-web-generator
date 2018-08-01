@@ -1,111 +1,72 @@
 import os
 from os.path import join
 import shutil
+from lib.make_misc import make_misc
 from lib.make_blog import make_blog
-from lib.settings import load_settings
-from lib.misc import load_json
-from lib.make_memu import make_menu_entry
+from lib.make_single_page import make_single_page
+from lib.settings import Settings as S
+from lib.make_memu import make_menu
 
-"""
-Directory structure:
-    /lib
-        make_blog
-        make_page
-    /output
-        images
-            thumbs
-        downloads
-        scripts
-        style
-        pages
-            10-blog
-                posts
-                    gaming_in_qemu.html
-                    skoda_forman.html
-                blog.html
-            20-about
-                about.html
-        index.html
-    /src
-        images
-        downloads
-        scripts
-        style
-        pages
-            10-blog
-                posts
-                    2-gaming_in_qemu.html
-                    1-skoda_forman.html
-                blog.json
-            20-about
-                page.html
-            30-github
-                link.json
-        page.html
-        web_settings.json
-            
-"""
+# TODO: Add options for meta tag description or something
 
 
 def clear_destination():
-    """ Delete old assembled web """
+    ''' Delete old output directory '''
     if os.path.exists('output'):
+        print('Removing old output')
         shutil.rmtree('output')
 
 
 def copy_static_files():
-    """ Copy static files """
+    ''' Copy static files '''
     if not os.path.exists('output'):
         os.mkdir('output')
+
+    if not os.path.exists(join('output', 'misc')):
+        os.mkdir(join('output', 'misc'))
+
     shutil.copytree(join('src', 'images'), join('output', 'images'))
     shutil.copytree(join('src', 'downloads'), join('output', 'downloads'))
     shutil.copytree(join('src', 'scripts'), join('output', 'scripts'))
     shutil.copytree(join('src', 'style'), join('output', 'style'))
+
     if not os.path.exists(join('output', 'images', 'thumbs')):
         os.mkdir(join('output', 'images', 'thumbs'))
 
 
 if __name__ == "__main__":
-    settings = load_settings()
+    # Init settings
+    S()
 
     clear_destination()
     copy_static_files()
 
-    # make pages
-    os.mkdir(join('output', 'pages'))
     pages_path = join('src', 'pages')
-    pages_list = os.listdir(pages_path)
+    # sort by number that should be before the name
+    try:
+        pages_list = sorted(os.listdir(pages_path), key=lambda x: int(x.split('-')[0]))
+    except ValueError:
+        print('ERROR: All pages directories must start with number. Example: 25-page_name')
+        exit(1)
 
     # make menu
-    menu = ''
-    for line in pages_list:
-        if os.path.isfile(join(pages_path, line, 'blog.json')):
-            page = load_json(join(pages_path, line, 'blog.json'))
-            menu += make_menu_entry(page['name'], join('/', line))
+    menu = make_menu(pages_list, pages_path)
 
-        if os.path.isfile(join(pages_path, line, 'index.html')):
-            pass
-
-        if os.path.isfile(join(pages_path, line, 'link.json')):
-            pass
+    # make misc pages
+    make_misc(menu)
 
     # make pages
+    os.mkdir(join('output', 'pages'))
     for line in pages_list:
         if os.path.isfile(join(pages_path, line, 'blog.json')):
             make_blog(join(pages_path, line), menu)
-        if os.path.isfile(join(pages_path, line, 'page.html')):
-            pass
-        if os.path.isfile(join(pages_path, line, 'link.json')):
-            pass
+        if os.path.isfile(join(pages_path, line, 'index.html')):
+            make_single_page(join(pages_path, line), menu)
 
     # make index
-    #with open(join('src', 'page.html'), 'r') as file:
-    #    template = file.read()
-
-    #with open(join('output', 'pages', settings['default_page'], 'blog.html'), 'r') as file:
-    #    content = file.read()
-
-    #web = template.format(web_name=settings['name'], menu="Menu", content=content, copy=settings['copyright'])
-
-    #with open(join('output', 'index.html'), 'w') as file:
-    #    file.write(web)
+    default_page_path = join('output', 'pages', S().default_page, 'index.html')
+    if os.path.exists(default_page_path):
+        shutil.copy(default_page_path, join('output', 'index.html'))
+    else:
+        print('ERROR: Default page doesn\'t exists.')
+        exit(1)
