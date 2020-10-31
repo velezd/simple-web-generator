@@ -1,6 +1,7 @@
 from lib.path import src_to_static
 from lib.make_image import make_gallery, make_big_image
 from lib.make_download import make_download
+from lib.make_icon import make_icon
 from lib.assemble_page import assemble_page
 
 
@@ -60,6 +61,9 @@ def make_html(path, menu):
 
                 # Generate html and create thumbnail
                 html += make_gallery(line.split(':'))
+
+            elif line.startswith('@icon'):
+                html += make_icon(line.split(':')[1])
 
             elif gallery:
                 # End gallery

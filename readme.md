@@ -22,6 +22,7 @@ Simple static web generator created for my own use. Creates static web from file
 - To create link in the menu, create a directory as before and inside it link.json:
 	{"name": "GitHub",
 	"link": "https://github.com/mygit/"}
+- Google Analytics can be enabled by adding your ID to src/page.html and src/scripts/analytics.js. If you don't want to use it remove the labeled code from src/page.html. You should also review the information in src/misc/privacy.html file, I have no responsibility for any legal issue that may come up from using it.
 
 
 ### Special commands
@@ -34,6 +35,7 @@ Simple static web generator created for my own use. Creates static web from file
 **@bigimage:image.jpg:Image comment** - Shows image scaled to the full with of the web
 **@medimage:image comment** - Shows image scaled to about half of the web 
 **@download:file.zip:license:link** - Shows download link, a license can be from the list ./lib/licenses.json or custom one - then you should also add link to it
+**@icon:icon_name** - Shows small icon from style/icons - Can be used to decorate links to social media etc.
 
 For usage examples check content created by test.sh
 

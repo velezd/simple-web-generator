@@ -4,7 +4,9 @@
         <link rel="stylesheet" href="{path}style/style.css">
         <link rel="stylesheet" href="{path}style/simpleLightbox.min.css">
         <link rel="stylesheet" href="{path}style/highlight-idea.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=GA_TRACKING_ID"></script><!-- Google Analytics - put tracking id here -->
         <script type="text/javascript" src="{path}scripts/jquery-3.3.1.slim.min.js"></script>
+        <script type="text/javascript" src="{path}scripts/analytics.js"></script><!-- Google Analytics -->
         <script type="text/javascript" src="{path}scripts/responsive_menu.js"></script>
         <script type="text/javascript" src="{path}scripts/simpleLightbox.min.js"></script>
         <script type="text/javascript" src="{path}scripts/highlight.pack.js"></script>
@@ -33,7 +35,13 @@
             </div>
         </div>
         <footer>
-            	{copy} - <a href="{path}misc/about.html">About web</a>
+            {copy} - <a href="{path}misc/about.html">About web</a> - <a href="{path}misc/privacy.html">Privacy policy</a>
         </footer>
     </body>
+    <!-- Google Analytics -->
+    <div id="cookies">
+        This site uses cookies from Google to analyze traffic.<br>
+        <a href="{path}misc/privacy.html"><button>More details</button></a>
+        <a onclick="give_consent()"><button>Ok</button></a>
+    </div>
 </html>

@@ -2,5 +2,6 @@
   "name": "Web name",
   "default_page": "test_blog",
   "copyright": "&copy; Something",
-  "web_root": "/"
+  "web_root": "/",
+  "blogposts_on_page": 10
 }

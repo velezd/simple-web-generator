@@ -1,8 +1,10 @@
 import os
+import shutil
 from os.path import join
 from lib.path import src_to_static
 from lib.make_html import make_html
 from lib.make_image import make_thumbnail
+from lib.paging import split_list, paging_html
 from lib.assemble_page import assemble_page
 from lib.settings import Settings as S
 
@@ -15,28 +17,36 @@ def make_blog(path, menu):
     :param menu: menu html
     :return: nothing
     '''
-
     # prepare new path
-    new_path = src_to_static(path)
+    output_path = src_to_static(path)
+    page_base_name = join(path, 'blog_%i.html')
 
-    # create new blog directories
-    if not os.path.exists(new_path):
-        os.mkdir(new_path)
-    if not os.path.exists(join(new_path, 'posts')):
-        os.mkdir(join(new_path, 'posts'))
+    # Create new blog directories
+    if not os.path.exists(output_path):
+        os.mkdir(output_path)
+    if not os.path.exists(join(output_path, 'posts')):
+        os.mkdir(join(output_path, 'posts'))
 
-    # create blog index
-    # TODO: Maybe add pagination
-    posts_list = get_posts_info(path)
-    html = generate_blog_index(posts_list)
-    html = assemble_page(html, menu)
+    # Create blog index
+    posts_lists = split_list(get_posts_info(path),
+                             S().blogposts_on_page)
+    page_index = 0
+    for posts_list in posts_lists:
+        html = generate_blog_index(posts_list)
+        html += paging_html(page_base_name, len(posts_lists), page_index)
+        html = assemble_page(html, menu)
 
-    with open(join(new_path, 'index.html'), 'w') as file:
-        file.write(html)
+        with open(src_to_static(join(page_base_name % page_index)), 'w') as file:
+            file.write(html)
+        page_index += 1
 
+    # copy index page
+    default_page_path = join(output_path, 'blog_0.html')
+    shutil.copy(default_page_path, join(output_path, 'index.html'))
+
+    # Create posts
     posts = os.listdir(join(path, 'posts'))
 
-    # create posts
     for post in posts:
         new_post_path = join(path, 'posts', post)
         if os.path.exists(src_to_static(new_post_path)):

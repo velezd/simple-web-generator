@@ -1,4 +1,4 @@
-﻿:root {
+:root {
     --background: #eee;
     --header-background: #111;
     --header-textcolor: #eee;
@@ -153,6 +153,29 @@ footer {
 footer a {
     text-decoration: none;
     color: var(--textblue);
+}
+
+.video {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+	margin-bottom: 25px;
+}
+
+.video iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 95%;
+	height: 100%;
+}
+
+.icon {
+    vertical-align: bottom;
+    width: 18px;
+    padding: 3px;
+    padding-right: 10px;
 }
 
 /*                       Blog item / menu                                     */
@@ -334,5 +357,62 @@ td {
 }
 
 tr:nth-child(even) {
-    background-color: #f2f2f2
+    background-color: #f2f2f2;
+}
+
+/*                                 PAGING                                     */
+.paging {
+    font-family: var(--title-font);
+    font-size: 14px;
+    color: var(--textblue);
+    text-align: center;
+    list-style-type: none;
+    width: var(--page-width);
+    margin-bottom: 20px;
+    margin-top: 10px;
+    padding: 0px;
+}
+
+.paging li {
+    background-color: var(--background);
+    border-bottom: 2px solid var(--textblue);
+	display: inline;
+    padding-top: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 3px;
+    margin: 3px;
+}
+
+.paging a {
+    text-decoration: none;
+    color: var(--textcolor);
+}
+
+/*                              Cookies consent                               */
+#cookies {
+    background-color: var(--header-background);
+    color: var(--header-textcolor);
+    font-family: var(--title-font);
+    font-size: 18px;
+    position: fixed;
+    text-align: center;
+    width: 450px;
+    margin-left: -225px;
+    top: 20%;
+    left: 50%;
+    padding: 20px;
+    display: none;
+}
+
+#cookies button {
+    width: 40%;
+    font-size: 18px;
+    background-color: var(--header-background);
+    color: var(--header-textcolor);
+    border: 1px solid var(--header-textcolor);
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 15px;
+    padding: 5px;
 }

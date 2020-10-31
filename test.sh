@@ -6,6 +6,9 @@ WARNING: Header image must be on first line'
 echo 'Output start:'
 echo
 
+mkdir src/images
+mkdir src/downloads
+mkdir src/pages
 cd tests
 python3 test_downloads.py
 python3 test_images.py

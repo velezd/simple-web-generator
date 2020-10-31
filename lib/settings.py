@@ -28,6 +28,7 @@ class Settings():
         self.default_page = ''
         self.copyright = ''
         self.web_root = ''
+        self.blogposts_on_page = ''
 
         try:
             with open(join('src', 'web_settings.json'), 'r') as file:
@@ -36,5 +37,6 @@ class Settings():
                 self.default_page = temp['default_page']
                 self.copyright = temp['copyright']
                 self.web_root = temp['web_root']
+                self.blogposts_on_page = temp['blogposts_on_page']
         except IOError:
             print('Can\'t load web settings')

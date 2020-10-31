@@ -29,13 +29,15 @@ rhoncus ac hendrerit a, finibus in leo. </p>
         with open('../src/pages/90-test_blog/posts/10-post_one.html', 'w') as file:
             file.write(html)
 
-        html = """
-@name:Minimal information
+        # Create more posts for pageing testing
+        for x in range(0, 20):
+            html = """
+@name:Minimal information %s
 <p>The simplest post you can create.</p>
 <p>Only name is defined.</p>
-        """
-        with open('../src/pages/90-test_blog/posts/20-minimal.html', 'w') as file:
-            file.write(html)
+            """ % str(x)
+            with open('../src/pages/90-test_blog/posts/2%s-minimal%s.html' % (str(x), str(x)), 'w') as file:
+                file.write(html)
 
         html = """
 @name:Typical post - longer name :)
