@@ -367,7 +367,7 @@ tr:nth-child(even) {
     color: var(--textblue);
     text-align: center;
     list-style-type: none;
-    width: var(--page-width);
+    width: 100%;
     margin-bottom: 20px;
     margin-top: 10px;
     padding: 0px;
@@ -397,22 +397,22 @@ tr:nth-child(even) {
     font-size: 18px;
     position: fixed;
     text-align: center;
-    width: 450px;
-    margin-left: -225px;
-    top: 20%;
-    left: 50%;
-    padding: 20px;
+    width: 100%;
+    bottom: 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     display: none;
+    opacity: 0.9;
 }
 
 #cookies button {
-    width: 40%;
+    width: 140px;
     font-size: 18px;
     background-color: var(--header-background);
     color: var(--header-textcolor);
     border: 1px solid var(--header-textcolor);
-    margin-left: 15px;
-    margin-right: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
     margin-top: 15px;
-    padding: 5px;
+    padding: 2px;
 }
