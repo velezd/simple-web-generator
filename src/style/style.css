@@ -24,6 +24,7 @@ body {
 
 .black_bar {
     position: fixed;
+    z-index: 100;
     width: 100%;
     top: 0px;
     margin: 0px;
@@ -280,6 +281,11 @@ article {
 article a {
     text-decoration: none;
     color: var(--textblue);
+    word-break: break-word;
+}
+
+article code {
+    word-break: break-word;
 }
 
 pre {
