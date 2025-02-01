@@ -82,7 +82,7 @@ def make_thumbnail(filename):
             size = 150, 150*10
         else:
             size = 150*10, 150
-        image.thumbnail(size, Image.ANTIALIAS)
+        image.thumbnail(size)
 
         # Crop to 1:1 ratio
         if image.height > image.width:
